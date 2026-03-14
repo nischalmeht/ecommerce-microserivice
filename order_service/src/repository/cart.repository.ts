@@ -48,7 +48,7 @@ const createCart = async (
 
 const findCart = async (id: number): Promise<CartWithLineItems> => {
   const cart = await DB.query.carts.findFirst({
-    where: (carts, { eq }) => eq(carts.customerId, id),
+    where: eq(carts.customerId, id),
     with: {
       lineItems: true,
     },
@@ -87,7 +87,7 @@ const findCartByProductId = async (
   productId: number
 ): Promise<CartLineItem> => {
   const cart = await DB.query.carts.findFirst({
-    where: (carts, { eq }) => eq(carts.customerId, customerId),
+    where: eq(carts.customerId, customerId),
     with: {
       lineItems: true,
     },

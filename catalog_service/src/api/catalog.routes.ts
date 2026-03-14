@@ -3,12 +3,13 @@ import { CatalogService } from "../services/catalog.service";
 import { CatalogRepository } from "../repository/catalog.repository";
 import { RequestValidator } from "../utils/requestValidator";
 import { CreateProductRequest, UpdateProductRequest } from "../dto/product.dto";
-
+import { BrokerService } from "../services/broker.service";
 
 const router = express.Router();
 
 export const catalogService = new CatalogService(new CatalogRepository());
-
+const brokerService = new BrokerService(catalogService);
+brokerService.initializeBroker();
 // endpoints
 router.post(
   "/products",
@@ -38,7 +39,7 @@ router.patch(
         req.body
       );
 
-      const id = parseInt(req.params.id) || 0;
+      const id = parseInt(req.params.id as string) || 0;
 
       if (errors) return res.status(400).json(errors);
 
@@ -69,7 +70,7 @@ router.get(
 router.get(
   "/products/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const id = parseInt(req.params.id) || 0;
+    const id = parseInt(req.params.id as string) || 0;
     try {
       const data = await catalogService.getProduct(id);
       return res.status(200).json(data);
@@ -82,7 +83,7 @@ router.get(
 router.delete(
   "/products/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const id = parseInt(req.params.id) || 0;
+    const id = parseInt(req.params.id as string) || 0;
     try {
       const data = await catalogService.deleteProduct(id);
       return res.status(200).json(data);

@@ -27,7 +27,7 @@ export const cartLineItems = pgTable("cart_line_items", {
   itemName: varchar("item_name").notNull(), // human readable
   variant: varchar("variant"), // Small // medium // big
   qty: integer("qty").notNull(),
-  price: numeric("amount").notNull(), // amount in cents
+  price: numeric("amount").notNull(), // amount in  cents
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
