@@ -1,6 +1,7 @@
 import { ICatalogRepository } from "../interface/catalogRepository.interface";
 import { OrderWithLineItems } from "../types/message.types";
 import { MessageType, OrderEvent } from "../types/subscription.type";
+import { AppEventListener } from "../utils/ElasticSearchContainer";
 
 export class CatalogService {
   private _repository: ICatalogRepository;
@@ -14,6 +15,10 @@ export class CatalogService {
     if (!data.id) {
       throw new Error("unable to create product");
     }
+     AppEventListener.instance.notify({
+      event: "createProduct",
+      data: data
+    });
     return data;
   }
 
@@ -22,6 +27,10 @@ export class CatalogService {
     if (!data.id) {
       throw new Error("unable to update product");
     }
+    AppEventListener.instance.notify({
+      event: "updateProduct",
+      data: data
+    });
     // emit event to update record in Elastic search
     return data;
   }
@@ -41,6 +50,10 @@ export class CatalogService {
   async deleteProduct(id: number) {
     const response = await this._repository.delete(id);
     // delete record from Elastic search
+    AppEventListener.instance.notify({
+      event: "updateProduct",
+      data: {id}
+    });
     return response;
   }
 

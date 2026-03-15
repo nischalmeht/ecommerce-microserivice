@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
+    "@elastic/elasticsearch": "^9.3.4",
     "@faker-js/faker": "^8.3.1",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",

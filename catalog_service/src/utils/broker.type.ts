@@ -1,3 +1,30 @@
+// import { CatalogEvent } from "../types/broker.types";
+// import { MessageType, OrderEvent, TOPIC_TYPE } from "../types/subscription.type";
+
+// export interface PublishType {
+//   headers: Record<string, any>;
+//   topic: TOPIC_TYPE;
+//   event: CatalogEvent;
+//   message: Record<string, any>;
+// }
+
+// export type MessageHandler = (input: MessageType) => void;
+
+// export type MessageBrokerType = {
+//   // producer
+//   connectProducer: <T>() => Promise<T>;
+//   disconnectProducer: () => Promise<void>;
+//   publish: (data: PublishType) => Promise<boolean>;
+
+//   // consumer
+//   connectConsumer: <T>() => Promise<T>;
+//   disconnectConsumer: () => Promise<void>;
+//   subscribe: (
+//     messageHandler: MessageHandler,
+//     topic: TOPIC_TYPE
+//   ) => Promise<void>;
+// };
+
 import { MessageType, CatalogEvent, TOPIC_TYPE } from "../types/broker.types";
 
 export interface PublishType {
@@ -23,3 +50,4 @@ export type MessageBrokerType = {
     topic: TOPIC_TYPE
   ) => Promise<void>;
 };
+
